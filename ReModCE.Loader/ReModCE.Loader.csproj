@@ -89,7 +89,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(TargetFileName) S:\Games\steamapps\common\VRChat\Mods\$(TargetFileName)
+    <PostBuildEvent>copy /Y $(TargetFileName) D:\Gry\Steam\steamapps\common\VRChat\Mods\$(TargetFileName)
 exit /b 0</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -232,33 +232,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\AvatarFavoritesComponent.cs" />
-    <Compile Include="Components\CalibrationSavingComponent.cs" />
+    <!--<Compile Include="Components\CalibrationSavingComponent.cs" />-->
     <Compile Include="Components\CopyUserInformationComponent.cs" />
     <Compile Include="Components\DisableChairComponent.cs" />
-    <Compile Include="Components\DynamicBonesComponent.cs" />
-    <Compile Include="Components\EmojiBlocker.cs" />
-    <Compile Include="Components\FlyComponent.cs" />
-    <Compile Include="Components\HighlightsComponent.cs" />
+    <!--<Compile Include="Components\DynamicBonesComponent.cs" />-->
+    <!--<Compile Include="Components\EmojiBlocker.cs" />-->
+    <!--<Compile Include="Components\FlyComponent.cs" />-->
+    <!--<Compile Include="Components\HighlightsComponent.cs" />-->
     <Compile Include="Components\InfoLogsComponent.cs" />
     <Compile Include="Components\InstanceDejavuComponent.cs" />
     <Compile Include="Components\InstanceHistoryComponent.cs" />
     <Compile Include="Components\InstanceLinkComponent.cs" />
-    <Compile Include="Components\LineTracerComponent.cs" />
-    <Compile Include="Components\MediaControlComponent.cs" />
+    <!--<Compile Include="Components\LineTracerComponent.cs" />-->
+    <!--<Compile Include="Components\MediaControlComponent.cs" />-->
     <Compile Include="Components\PopupExComponent.cs" />
     <Compile Include="Components\AvatarHistoryComponent.cs" />
-    <Compile Include="Components\PortalConfirmationComponent.cs" />
+    <!--<Compile Include="Components\PortalConfirmationComponent.cs" />-->
     <Compile Include="Components\RestartButtonComponent.cs" />
-    <Compile Include="Components\TeleportComponent.cs" />
-    <Compile Include="Components\ThirdPersonComponent.cs" />
-    <Compile Include="Components\VRCNewsAdjustment.cs" />
-    <Compile Include="Components\WireframeComponent.cs" />
+    <!--<Compile Include="Components\TeleportComponent.cs" />-->
+    <!--<Compile Include="Components\ThirdPersonComponent.cs" />-->
+    <!--<Compile Include="Components\VRCNewsAdjustment.cs" />-->
+    <!--<Compile Include="Components\WireframeComponent.cs" />-->
     <Compile Include="Core\ApiError.cs" />
     <Compile Include="Core\BinaryGZipSerializer.cs" />
     <Compile Include="Core\DynamicContractResolver.cs" />
     <Compile Include="Core\ReAvatar.cs" />
     <Compile Include="Core\TaskExtensions.cs" />
-    <Compile Include="Managers\RiskyFunctionsManager.cs" />
+    <!--<Compile Include="Managers\RiskyFunctionsManager.cs" />-->
     <Compile Include="ReMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -275,11 +275,44 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\*.png" />
+    <EmbeddedResource Remove="Resources\admin.png" />
+    <EmbeddedResource Remove="Resources\arms-up.png" /><!-- CalibrationSavingComponent.cs -->
+    <EmbeddedResource Remove="Resources\binoculars.png" /><!-- WireframeComponent.cs -->
+    <EmbeddedResource Remove="Resources\bone.png" /><!-- DynamicBonesComponent.cs -->
+    <EmbeddedResource Remove="Resources\cogwheel.png" /><!-- DynamicBonesComponent.cs -->
+    <EmbeddedResource Remove="Resources\discord.png" />
+    <EmbeddedResource Remove="Resources\dump.png" />
+    <EmbeddedResource Remove="Resources\eye.png" /><!-- ReMod.cs - Highlights & Wireframe, MediaControlComponent.cs, ThirdPersonComponent.cs -->
+    <EmbeddedResource Remove="Resources\flash.png" />
+    <EmbeddedResource Remove="Resources\hidden.png" />
+    <EmbeddedResource Remove="Resources\invite.png" />
+    <EmbeddedResource Remove="Resources\keyboard.png" /><!-- ReMod.cs - Hotkeys -->
+    <EmbeddedResource Remove="Resources\kick.png" /><!-- DynamicBonesComponent.cs -->
+    <EmbeddedResource Remove="Resources\mixer.png" />
+    <EmbeddedResource Remove="Resources\music.png" />
+    <EmbeddedResource Remove="Resources\next.png" /><!-- MediaControlComponent.cs -->
+    <EmbeddedResource Remove="Resources\palette.png" /><!-- HighlightsComponent.cs -->
+    <EmbeddedResource Remove="Resources\play.png" /><!-- MediaControlComponent.cs -->
+    <EmbeddedResource Remove="Resources\portal.png" />
+    <EmbeddedResource Remove="Resources\previous.png" /><!-- MediaControlComponent.cs -->
+    <EmbeddedResource Remove="Resources\radius.png" /><!-- DynamicBonesComponent.cs -->
+    <EmbeddedResource Remove="Resources\resolution.png" />
+    <EmbeddedResource Remove="Resources\running.png" /><!-- ReMod.cs - Movement -->
+    <EmbeddedResource Remove="Resources\search.png" />
+    <EmbeddedResource Remove="Resources\server.png" />
+    <EmbeddedResource Remove="Resources\shader.png" />
+    <EmbeddedResource Remove="Resources\shield.png" />
+    <EmbeddedResource Remove="Resources\speed.png" /><!-- FlyComponent.cs -->
+    <EmbeddedResource Remove="Resources\star.png" />
+    <EmbeddedResource Remove="Resources\stop.png" /><!-- MediaControlComponent.cs -->
+    <EmbeddedResource Remove="Resources\teleport.png" /><!-- TeleportComponent.cs -->
+    <EmbeddedResource Remove="Resources\udon.png" />
+    <EmbeddedResource Remove="Resources\wireframe.png" /><!-- WireframeComponent.cs -->
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(TargetFileName) S:\Games\steamapps\common\VRChat\$(TargetFileName)
+    <PostBuildEvent>copy /Y $(TargetFileName) D:\Gry\Steam\steamapps\common\VRChat\$(TargetFileName)
 exit /b 0</PostBuildEvent>
   </PropertyGroup>
 </Project>

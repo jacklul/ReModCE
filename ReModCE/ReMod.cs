@@ -63,7 +63,7 @@ namespace ReModCE
             _configManager = new ConfigManager(nameof(ReModCE));
 
             EnableDisableListener.RegisterSafe();
-            ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
+            //ClassInjector.RegisterTypeInIl2Cpp<WireframeEnabler>();
 
             SetIsOculus();
 
@@ -133,21 +133,21 @@ namespace ReModCE
             _uiManager = new UiManager("ReMod <color=#00ff00>CE</color>", ResourceManager.GetSprite("remodce.remod"));
             WingMenu = ReMirroredWingMenu.Create("ReModCE", "Open the RemodCE menu", ResourceManager.GetSprite("remodce.remod"));
             
-            _uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
+            //_uiManager.MainMenu.AddMenuPage("Movement", "Access movement related settings", ResourceManager.GetSprite("remodce.running"));
             
-            var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
-            visualPage.AddCategory("ESP/Highlights");
-            visualPage.AddCategory("Wireframe");
+            //var visualPage = _uiManager.MainMenu.AddCategoryPage("Visuals", "Access anything that will affect your game visually", ResourceManager.GetSprite("remodce.eye"));
+            //visualPage.AddCategory("ESP/Highlights");
+            //visualPage.AddCategory("Wireframe");
             
-            _uiManager.MainMenu.AddMenuPage("Dynamic Bones", "Access your global dynamic bone settings", ResourceManager.GetSprite("remodce.bone"));
+            //_uiManager.MainMenu.AddMenuPage("Dynamic Bones", "Access your global dynamic bone settings", ResourceManager.GetSprite("remodce.bone"));
             _uiManager.MainMenu.AddMenuPage("Avatars", "Access avatar related settings", ResourceManager.GetSprite("remodce.hanger"));
             
             var utilityPage = _uiManager.MainMenu.AddCategoryPage("Utility", "Access miscellaneous settings", ResourceManager.GetSprite("remodce.tools"));
             utilityPage.AddCategory("Quality of Life");
-            utilityPage.AddCategory("VRChat News");
+            //utilityPage.AddCategory("VRChat News");
             
             _uiManager.MainMenu.AddMenuPage("Logging", "Access logging related settings", ResourceManager.GetSprite("remodce.log"));
-            _uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
+            //_uiManager.MainMenu.AddMenuPage("Hotkeys", "Access hotkey related settings", ResourceManager.GetSprite("remodce.keyboard"));
 
             foreach (var m in Components)
             {
