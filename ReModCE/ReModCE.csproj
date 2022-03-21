@@ -314,6 +314,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y $(TargetFileName) D:\Gry\Steam\steamapps\common\VRChat\$(TargetFileName)
+copy /Y ReMod.Core.dll D:\Gry\Steam\steamapps\common\VRChat\ReMod.Core.dll
 exit /b 0</PostBuildEvent>
   </PropertyGroup>
 </Project>
