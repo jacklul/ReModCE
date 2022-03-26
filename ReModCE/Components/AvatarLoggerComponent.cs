@@ -17,6 +17,7 @@ namespace ReModCE.Components
         private ConfigValue<string> AvatarLoggerExternalCheckFile;
         private ReMenuToggle _AvatarLoggerToggle;
         private readonly List<string> seenAvatars = new();
+        private long lastUpdateFrame = 0;
 
         public AvatarLoggerComponent()
         {
@@ -43,6 +44,13 @@ namespace ReModCE.Components
         public override void OnUpdate()
         {
             if (!AvatarLoggerEnabled) return;
+
+            if (lastUpdateFrame < 1000)
+            {
+                lastUpdateFrame++;
+                return;
+            }
+            lastUpdateFrame = 0;
 
             var playerManager = PlayerManager.field_Private_Static_PlayerManager_0;
             if (playerManager == null) return;
