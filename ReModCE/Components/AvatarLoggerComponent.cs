@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
@@ -18,6 +19,7 @@ namespace ReModCE.Components
         private ReMenuToggle _AvatarLoggerToggle;
         private readonly List<string> seenAvatars = new();
         private long lastUpdateFrame = 0;
+        private string[] ignoredIds = new string[] { "avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11" };
 
         public AvatarLoggerComponent()
         {
@@ -59,6 +61,12 @@ namespace ReModCE.Components
             {
                 var avatar = player.GetApiAvatar();
                 if (avatar == null) continue;
+
+                if (ignoredIds.Contains(avatar.id) || avatar.id.StartsWith("local:"))
+                {
+                    seenAvatars.Add(avatar.id);
+                    continue;
+                }
 
                 if (!seenAvatars.Contains(avatar.id))
                 {
