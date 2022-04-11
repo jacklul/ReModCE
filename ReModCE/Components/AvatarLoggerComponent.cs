@@ -26,11 +26,6 @@ namespace ReModCE.Components
             AvatarLoggerEnabled = new ConfigValue<bool>(nameof(AvatarLoggerEnabled), true);
             AvatarLoggerEnabled.OnValueChanged += () => _AvatarLoggerToggle.Toggle(AvatarLoggerEnabled);
             AvatarLoggerExternalCheckFile = new ConfigValue<string>(nameof(AvatarLoggerExternalCheckFile), "");
-
-            if (!string.IsNullOrEmpty(AvatarLoggerExternalCheckFile) && File.Exists(AvatarLoggerExternalCheckFile))
-            {
-                ReLogger.Msg(ConsoleColor.Cyan, "Using additional file for avatar id existence checks: " + AvatarLoggerExternalCheckFile);
-            }
         }
 
         public override void OnUiManagerInit(UiManager uiManager)
