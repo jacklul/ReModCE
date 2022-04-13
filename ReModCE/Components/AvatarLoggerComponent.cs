@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using ReMod.Core;
+﻿using ReMod.Core;
 using ReMod.Core.Managers;
 using ReMod.Core.UI.QuickMenu;
 using ReMod.Core.VRChat;
 using ReModCE.Loader;
-using VRC.Core;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using VRC;
+using VRC.Core;
+using VRC.SDKBase;
 
 namespace ReModCE.Components
 {
@@ -18,7 +19,7 @@ namespace ReModCE.Components
         private ConfigValue<string> AvatarLoggerExternalCheckFile;
         private ReMenuToggle _AvatarLoggerToggle;
         private readonly List<string> seenAvatars = new();
-        private long lastUpdateFrame = 0;
+        private long lastUpdateFrame;
         private string[] ignoredIds = new string[] { "avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11" };
 
         public AvatarLoggerComponent()
@@ -38,23 +39,23 @@ namespace ReModCE.Components
                 AvatarLoggerEnabled);
         }
 
-        public override void OnUpdate()
+        public override void OnLateUpdate()
         {
             if (!AvatarLoggerEnabled) return;
 
-            if (lastUpdateFrame < 1000)
+            if (lastUpdateFrame < 100)
             {
                 lastUpdateFrame++;
                 return;
             }
             lastUpdateFrame = 0;
 
-            var playerManager = PlayerManager.field_Private_Static_PlayerManager_0;
+            PlayerManager playerManager = PlayerManager.field_Private_Static_PlayerManager_0;
             if (playerManager == null) return;
 
-            foreach (var player in playerManager.GetPlayers())
+            foreach (Player player in playerManager.GetPlayers())
             {
-                var avatar = player.GetApiAvatar();
+                ApiAvatar avatar = player.GetApiAvatar();
                 if (avatar == null) continue;
 
                 if (ignoredIds.Contains(avatar.id) || avatar.id.StartsWith("local:"))
@@ -68,45 +69,29 @@ namespace ReModCE.Components
                     seenAvatars.Add(avatar.id);
                     if (avatar.releaseStatus == "private") continue;
 
-                    SaveAvatarId(avatar, player);
+                    SaveAvatarId(avatar, player.GetVRCPlayer().GetPlayerApi());
                 }
             }
         }
 
-        // @TODO figure how to implement this in ReMod.cs...
-        /*public override bool OnDownloadAvatar(ApiAvatar apiAvatar)
-        {
-            ReLogger.Msg(ConsoleColor.White, "OnDownloadAvatar called for Avatar ID: " + apiAvatar.id);
-
-            if (AvatarLoggerEnabled && apiAvatar.releaseStatus != "private")
-            {
-                SaveAvatarId(apiAvatar);
-            }
-
-            return base.OnDownloadAvatar(apiAvatar);
-        }*/
-
-        private void SaveAvatarId(ApiAvatar avatar, Player player = null)
+        private void SaveAvatarId(ApiAvatar avatar, VRCPlayerApi player = null)
         {
             string file = "UserData/ReModCE/avatars/" + (DateTime.Now).ToString("yyyy-MM-dd") + ".txt";
-            string line = avatar.id + " " + avatar.name + (player != null ? " (" + player.field_Private_APIUser_0.displayName + ")" : "") + " - https://vrchat.com/home/avatar/" + avatar.id;
+            string line = $"{avatar.id} {avatar.name}{(player != null ? $" ({player.displayName})" : "")} - https://vrchat.com/home/avatar/{avatar.id}";
 
-            if (!Directory.Exists("UserData/ReModCE/avatars")) Directory.CreateDirectory("UserData/ReModCE/avatars");
+            if (!Directory.Exists("UserData/ReModCE/avatars"))
+                Directory.CreateDirectory("UserData/ReModCE/avatars");
 
             if (File.Exists(file))
-            {
                 if (File.ReadAllText(file).Contains(avatar.id)) return;
-            }
 
             if (!string.IsNullOrEmpty(AvatarLoggerExternalCheckFile) && File.Exists(AvatarLoggerExternalCheckFile))
-            {
                 if (File.ReadAllText(AvatarLoggerExternalCheckFile).Contains(avatar.id)) return;
-            }
 
             using (StreamWriter sw = File.AppendText(file))
             {
                 sw.WriteLine(line);
-                ReLogger.Msg(ConsoleColor.Cyan, "Saving avatar ID: " + avatar.id);
+                ReLogger.Msg(ConsoleColor.Cyan, $"Saving avatar ID: {avatar.id}{(player != null ? $" ({player.displayName})" : "")}");
             }
         }
     }
