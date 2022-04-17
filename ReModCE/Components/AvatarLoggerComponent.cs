@@ -69,15 +69,15 @@ namespace ReModCE.Components
                     seenAvatars.Add(avatar.id);
                     if (avatar.releaseStatus == "private") continue;
 
-                    SaveAvatarId(avatar, player.GetVRCPlayer().GetPlayerApi());
+                    SaveAvatarId(avatar, player);
                 }
             }
         }
-
-        private void SaveAvatarId(ApiAvatar avatar, VRCPlayerApi player = null)
+        
+        private void SaveAvatarId(ApiAvatar avatar, Player player = null)
         {
             string file = "UserData/ReModCE/avatars/" + (DateTime.Now).ToString("yyyy-MM-dd") + ".txt";
-            string line = $"{avatar.id} {avatar.name}{(player != null ? $" ({player.displayName})" : "")} - https://vrchat.com/home/avatar/{avatar.id}";
+            string line = $"{avatar.id} {avatar.name}{(player != null ? $" ({player.field_Private_APIUser_0.displayName})" : "")} - https://vrchat.com/home/avatar/{avatar.id}";
 
             if (!Directory.Exists("UserData/ReModCE/avatars"))
                 Directory.CreateDirectory("UserData/ReModCE/avatars");
@@ -91,7 +91,7 @@ namespace ReModCE.Components
             using (StreamWriter sw = File.AppendText(file))
             {
                 sw.WriteLine(line);
-                ReLogger.Msg(ConsoleColor.Cyan, $"Saving avatar ID: {avatar.id}{(player != null ? $" ({player.displayName})" : "")}");
+                ReLogger.Msg(ConsoleColor.Cyan, $"Saving avatar ID: {avatar.id}{(player != null ? $" ({player.field_Private_APIUser_0.displayName})" : "")}");
             }
         }
     }
