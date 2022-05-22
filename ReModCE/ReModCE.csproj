@@ -203,6 +203,24 @@
       <HintPath>$(MlPath)\Managed\VRCSDKBase.dll</HintPath>
     </Reference>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Components\CalibrationSavingComponent.cs" />
+    <Compile Remove="Components\DiscordPopupComponent.cs" />
+    <Compile Remove="Components\DynamicBonesComponent.cs" />
+    <Compile Remove="Components\EmojiBlocker.cs" />
+    <Compile Remove="Components\FlyComponent.cs" />
+    <Compile Remove="Components\HighlightsComponent.cs" />
+    <Compile Remove="Components\LineTracerComponent.cs" />
+    <Compile Remove="Components\MediaControlComponent.cs" />
+    <Compile Remove="Components\PortalConfirmationComponent.cs" />
+    <Compile Remove="Components\TeleportComponent.cs" />
+    <Compile Remove="Components\ThirdPersonComponent.cs" />
+    <Compile Remove="Components\VRCNewsAdjustment.cs" />
+    <Compile Remove="Components\WireframeComponent.cs" />
+    <Compile Remove="Managers\RiskyFunctionsManager.cs" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\ReModCE.Loader\ReModCE.Loader.csproj">
       <Project>{6e5e0e59-73d9-4d74-b734-d040d26710c4}</Project>
