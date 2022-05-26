@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 /Dependencies
 /.build/
-/3rdparty/ml/
+/3rdparty/ml*/
