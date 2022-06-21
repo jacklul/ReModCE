@@ -43,7 +43,7 @@ namespace ReModCE.Components
         {
             if (!AvatarLoggerEnabled) return;
 
-            if (lastUpdateFrame < 100)
+            if (lastUpdateFrame < 10)
             {
                 lastUpdateFrame++;
                 return;
