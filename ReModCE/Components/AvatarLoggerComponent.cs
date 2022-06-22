@@ -19,7 +19,6 @@ namespace ReModCE.Components
         private ConfigValue<string> AvatarLoggerExternalCheckFile;
         private ReMenuToggle _AvatarLoggerToggle;
         private readonly List<string> seenAvatars = new();
-        private long lastUpdateFrame;
         private string[] ignoredIds = new string[] { "avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11" };
 
         public AvatarLoggerComponent()
@@ -39,6 +38,9 @@ namespace ReModCE.Components
                 AvatarLoggerEnabled);
         }
 
+        /*
+        private long lastUpdateFrame;
+        
         public override void OnLateUpdate()
         {
             if (!AvatarLoggerEnabled) return;
@@ -58,24 +60,49 @@ namespace ReModCE.Components
                 ApiAvatar avatar = player.GetApiAvatar();
                 if (avatar == null) continue;
 
-                if (ignoredIds.Contains(avatar.id) || avatar.id.StartsWith("local:"))
-                {
-                    seenAvatars.Add(avatar.id);
-                    continue;
-                }
-
-                if (!seenAvatars.Contains(avatar.id))
-                {
-                    seenAvatars.Add(avatar.id);
-                    if (avatar.releaseStatus == "private") continue;
-
-                    SaveAvatarId(avatar, player);
-                }
+                SaveAvatarId(avatar, player);
             }
+        }*/
+
+        /*public override void OnPlayerJoined(Player player)
+        {
+            if (!AvatarLoggerEnabled) return;
+
+            ApiAvatar avatar = player.GetApiAvatar();
+
+            if (avatar != null)
+                SaveAvatarId(avatar, player);
         }
-        
+
+        public override void OnPlayerLeft(Player player)
+        {
+            if (!AvatarLoggerEnabled) return;
+
+            ApiAvatar avatar = player.GetApiAvatar();
+
+            if (avatar != null)
+                SaveAvatarId(avatar, player);
+        }*/
+
+        public override void OnAvatarIsReady(VRCPlayer vrcPlayer)
+        {
+            Player player = vrcPlayer.GetPlayer();
+
+            if (player == null) return;
+
+            ApiAvatar avatar = player.GetApiAvatar();
+
+            if (avatar != null)
+                SaveAvatarId(avatar, player);
+        }
+
         private void SaveAvatarId(ApiAvatar avatar, Player player = null)
         {
+            if (seenAvatars.Contains(avatar.id) || ignoredIds.Contains(avatar.id) || avatar.id.StartsWith("local:")) return;
+
+            seenAvatars.Add(avatar.id);
+            if (avatar.releaseStatus == "private") return;
+
             string file = "UserData/ReModCE/avatars/" + (DateTime.Now).ToString("yyyy-MM-dd") + ".txt";
             string line = $"{avatar.id} {avatar.name}{(player != null ? $" ({player.field_Private_APIUser_0.displayName})" : "")} - https://vrchat.com/home/avatar/{avatar.id}";
 

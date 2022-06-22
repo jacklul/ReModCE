@@ -35,16 +35,15 @@ namespace ReModCE.Components
         {
             if (!WorldLoggerEnabled) return;
 
-            if (!seenWorlds.Contains(world.id))
-            {
-                seenWorlds.Add(world.id);
-
-                SaveWorldId(world);
-            }
+            SaveWorldId(world);
         }
         
         private void SaveWorldId(ApiWorld world)
         {
+            if (seenWorlds.Contains(world.id)) return;
+
+            seenWorlds.Add(world.id);
+
             string file = "UserData/ReModCE/worlds/" + (DateTime.Now).ToString("yyyy-MM-dd") + ".txt";
             string line = $"{world.name} - https://vrchat.com/home/world/{world.id}";
 
