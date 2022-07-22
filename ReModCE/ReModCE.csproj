@@ -211,14 +211,9 @@
     <Compile Remove="Components\EmojiBlocker.cs" />
     <Compile Remove="Components\FlyComponent.cs" />
     <Compile Remove="Components\HighlightsComponent.cs" />
-    <Compile Remove="Components\InstanceDejavuComponent.cs" />
-    <Compile Remove="Components\InstanceHistoryComponent.cs" />
-    <Compile Remove="Components\InstanceLinkComponent.cs" />
     <Compile Remove="Components\LineTracerComponent.cs" />
     <Compile Remove="Components\MediaControlComponent.cs" />
-    <Compile Remove="Components\PortalConfirmationComponent.cs" />
     <Compile Remove="Components\RestartButtonComponent.cs" />
-    <Compile Remove="Components\SocialMenuCompactor.cs" />
     <Compile Remove="Components\TeleportComponent.cs" />
     <Compile Remove="Components\ThirdPersonComponent.cs" />
     <Compile Remove="Components\VRCNewsAdjustment.cs" />
